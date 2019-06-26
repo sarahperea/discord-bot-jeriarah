@@ -5,12 +5,10 @@ module.exports.run = async(client, message, args) => {
       message.member.voiceChannel.join()
         .then(connection => { // Connection is an instance of VoiceConnection
           message.reply('I have successfully connected to the channel!');
-          return true;
         })
-        .catch(() => false);
+        .catch();
     } else {
       message.reply('You need to join a voice channel first!');
-      return true;
     }
 }
 
