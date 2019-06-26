@@ -39,9 +39,15 @@ client.on('message', async message => {
        
     args = args.splice(1); // arguments array after the command
     let cmdFile = client.commands.get(cmd);
-    if (cmdFile) cmdFile.run(client, message, args);
+    if (cmdFile){
+      if (cmd === 'join') {
+       voiceChannelConnection = cmdFile.run(client, message, args);
+      } else {
+        cmdFile.run(client, message, args);        
+      }
+    } 
     else console.log('Sorry, no command found.')
-    switch(cmd) {
+/*    switch(cmd) {
     	case 'join':
 	    if (message.member.voiceChannel) {
 	      message.member.voiceChannel.join()
@@ -68,7 +74,7 @@ client.on('message', async message => {
     	case 'ping':
     		message.reply('pong!');
     	break;	
-    }
+    }*/
   }
 
 });
