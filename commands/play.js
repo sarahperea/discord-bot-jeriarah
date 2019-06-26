@@ -2,15 +2,16 @@ const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 
 module.exports.run = async(client, message, args) => {
+  let channel = message.member.voiceChannel;
   if (args.length === 0) {
     console.log("Sorry, this command requires a youtube video url to play. :P")
   } else {
-	if (message.member.voiceChannel) {
-      	message.member.voiceChannel.join()
+	if (channel) {
+      	channel.join()
         .then(connection => { // Connection is an instance of VoiceConnection
           const streamOptions = { seek: 0, volume: 5 };
-	      const stream = ytdl(args[0], { filter : 'audioonly' });
-	      const dispatcher = connection.playStream(stream, streamOptions);
+  	      const stream = ytdl(args[0], { filter : 'audioonly' });
+  	      const dispatcher = connection.playStream(stream, streamOptions);
         })
         .catch();
     } else {
