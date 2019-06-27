@@ -5,7 +5,7 @@ module.exports.run = async(client, message, args) => {
   if (channel) {
     channel.join()
       .then(connection => { // Connection is an instance of VoiceConnection
-        message.reply('I have successfully connected to the channel!');
+        message.channel.send('I have successfully connected to the channel!');
       })
       .catch();
   } else {
