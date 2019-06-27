@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core');
 module.exports.run = async(client, message, args) => {
   let channel = message.member.voiceChannel;
   if (args.length === 0) {
-    console.log("Sorry, this command requires a youtube video url to play. :P")
+    console.log("Sorry updat4ed , this command requires a youtube video url to play. :P")
   } else {
 	if (channel) {
       	channel.join()
