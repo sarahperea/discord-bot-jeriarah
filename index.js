@@ -44,4 +44,4 @@ client.on('message', async message => {
 
 });
 
-client.login(process.env.DISCORD_BOT_SAMGYUPSAR_TOKEN);
+client.login(process.env.DISCORD_BOT_JERIARAH_TOKEN);
