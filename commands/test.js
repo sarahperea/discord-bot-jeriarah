@@ -3,9 +3,9 @@ const axios = require('axios');
 const apiKey = process.env.MEETUP_API_KEY; 
 
 module.exports.run = async(client, message, args) => {
-	const topic = args[0];
+	const category = args[0];
 	let names = [];
-	axios.get(`https://api.meetup.com/2/open_events?topic=${topic}&time=,1w&key=${apiKey}`, {}).then(res => {
+	axios.get(`https://api.meetup.com/2/open_events?category=${category}&time=,1w&key=${apiKey}`, {}).then(res => {
 		for(let r of res.data.results) {
 			if(r.venue) {
 				names = [...names, r.venue.name];
