@@ -8,13 +8,21 @@ module.exports.run = async(client, message, args) => {
 		axios.get(`https://api.meetup.com/2/open_events?text=${text}&time=,1w&key=${apiKey}`, {
 
 		}).then(res => {
+			let events = []
 			for(let r of res.data.results) {
-				if(r.venue) {
-					names = [...names, r.venue.name];
+				if (r) {
+					let embed = new Discord.RichEmbed()
+						.setColor('#0099ff')
+						.setTitle(r.name || '')
+						.setURL(r.event_url || '')
+						.addField('Status', r.status || 'a')
+						.addField('Duration', r.duration ? new Date(r.duration * 1000) : 'a')
+						.addField('Venue', r.venue && r.venue.name ? r.venue.name : 'a')
+					
+					events = [...events, embed];				
 				}
 			}
-			let events = names.join().substring(0, 2000);
-			message.channel.send(events);
+			message.channel.send(events[0]);
 		}).catch(err => {
 			console.log(err);
 		});		
