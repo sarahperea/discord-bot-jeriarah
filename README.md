@@ -21,6 +21,10 @@ If you are a person who always have the discord open and doesn't want to hassle 
 
 	`$topic <meetup-topic>`
 
+- **event**: Find meetup events by anything related in your input
+
+	`$event <meetup-event>`
+
 - **play**: Play music that searches on youtube
 
 	`$play <youtube-url>`
@@ -29,4 +33,9 @@ If you are a person who always have the discord open and doesn't want to hassle 
 
 	`$search <keyword1> <keyword2> <...keywords>`
 
-- **event**:
+### Test
+*You need to provide required environment variables below: *
+
+- DISCORD_BOT_JERIARAH_TOKEN
+- MEETUP_API_KEY
+- YOUTUBE_DATA_API_KEY
