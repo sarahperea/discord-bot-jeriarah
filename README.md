@@ -9,8 +9,24 @@ If you are a person who always have the discord open and doesn't want to hassle 
 --- 
 
 ### Commands
+- **join**: Joins discord bot to channel
+
+	`$join`
+
 - **status**: Check the meetup api service status
-- **topics**: Find meetup topics by anything related in your input
+
+	`$status`
+
+- **topic**: Find meetup topics by anything related in your input
+
+	`$topic <meetup-topic>`
+
 - **play**: Play music that searches on youtube
+
+	`$play <youtube-url>`
+		
 - **search**: Return top 5 youtube video results containing the entered keywords
-	`$search cat funny`
+
+	`$search <keyword1> <keyword2> <...keywords>`
+
+- **event**:
