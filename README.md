@@ -12,3 +12,5 @@ If you are a person who always have the discord open and doesn't want to hassle 
 - **status**: Check the meetup api service status
 - **topics**: Find meetup topics by anything related in your input
 - **play**: Play music that searches on youtube
+- **search**: Return top 5 youtube video results containing the entered keywords
+	`$search cat funny`
