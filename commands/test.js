@@ -3,32 +3,32 @@ const axios = require('axios');
 const apiKey = process.env.MEETUP_API_KEY; 
 
 module.exports.run = async(client, message, args) => {
-	args.map((text) => {
-		let names = [];
-		axios.get(`https://api.meetup.com/2/open_events?text=${text}&time=,1w&key=${apiKey}`, {
-
-		}).then(res => {
-			let events = []
-			for(let r of res.data.results) {
-				if (r) {
-					let embed = new Discord.RichEmbed()
-						.setColor('#0099ff')
-						.setTitle(r.name || '')
-						.setURL(r.event_url || '')
-						.addField('Status', r.status || 'a')
-						.addField('Duration', r.duration ? new Date(r.duration * 1000) : 'a')
-						.addField('Venue', r.venue && r.venue.name ? r.venue.name : 'a')
-					
-					events = [...events, embed];				
-				}
+	let texts = args.join(' ')
+	let names = [];
+	axios.get(`https://api.meetup.com/2/open_events?text=${texts}&and_text=true&&time=,1w&key=${apiKey}&page=5`, {
+	}).then(res => {
+		if (res.data.results.length)
+			message.channel.send(`Meetups happening within the next week related to ${texts.replace(/\s/g, ', ')}:`)
+		
+		for (let i = 1; i <= 5 && i <= res.data.results.length; i++) {
+			let r = res.data.results[i];			
+			if (r) {
+				let embed = new Discord.RichEmbed()
+					.setColor('#0099ff')
+				if (r.name)      embed.setTitle(`${i}. ${r.name}`)
+				if (r.event_url) embed.setURL(r.event_url)
+				if (r.status)    embed.addField('Status', r.status)	
+				if (r.duration)  embed.addField('Duration', new Date(r.duration*1000))
+				if (r.venue) 	 embed.addField(`${r.venue.name || ''}, ${r.venue.address_1 || ''} ${r.venue.address_2 || ''} ${r.venue.address_3 || ''} ${r.venue.city || ''} ${r.venue.state || ''}`)
+				
+				message.channel.send(embed);							
 			}
-			message.channel.send(events[0]);
-		}).catch(err => {
-			console.log(err);
-		});		
-	})
+		}
+	}).catch(err => {
+		console.log(err);
+	});		
 }
 
 module.exports.help = {
-	name: 'test'
+	name: 'text'
 }
