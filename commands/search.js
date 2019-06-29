@@ -16,8 +16,16 @@ module.exports.run = async(client, message, args) => {
         }).then(res => {
           if (res.data) {
             for (let i=0; i<res.data.items.length; i++) {
-              let r = res.data.items[i]  
-              console.log(`https://www.youtube.com/watch?v=${r.id.videoId}`)
+              let r = res.data.items[i] 
+              if (r) {
+                let embed = new Discord.RichEmbed()
+                  .setColor('#0099ff')
+                  .setTitle(`${i+1}. ${r.snippet.title}`)
+                  .setDescription(`${r.snippet.description.substring(0,99)}...`)
+                  .setURL(`https://www.youtube.com/watch?v=${r.id.videoId}`)
+
+                message.channel.send(embed)                
+              } 
             }
           }
         }).catch((err) => {
